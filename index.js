@@ -40,4 +40,4 @@ app.get(['/', '/help', 'endpoints'], function (req, res) {
   res.send("/usage\n/currencies\n/:from/:to/:amt\n");
 })
  
-app.listen(3000)
+app.listen(80)
