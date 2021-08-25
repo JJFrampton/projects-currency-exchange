@@ -40,4 +40,4 @@ app.get(['/', '/help', 'endpoints'], function (req, res) {
   res.send("/usage\n/currencies\n/:from/:to/:amt\n");
 })
 
-app.listen(80, "0.0.0.0");
+app.listen(process.env.PORT || 3000, "0.0.0.0");
