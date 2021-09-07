@@ -1,28 +1,26 @@
-use actix_web::{
-    error, get, guard, middleware, web, App, Error, HttpRequest, HttpResponse,
-    HttpServer, Result, Responder,
-};
+use actix_web::{web, App, HttpRequest, HttpServer, Responder, middleware};
 use std::{io, env};
 
-#[get("/")]
-async fn index(web::Path((id, name)): web::Path<(u32, String)>) -> impl Responder {
-    format!("Hello {}! id:{}", name, id)
+async fn greet(req: HttpRequest) -> impl Responder {
+    let name = req.match_info().get("name").unwrap_or("World");
+    format!("Hello {}!", &name)
 }
 
 #[actix_web::main]
-async fn main() -> io::Result<()> {
+async fn main() -> std::io::Result<()> {
 
     println!("Starting logger");
     env::set_var("RUST_LOG", "actix_web=debug,actix_server=info");
     env_logger::init();
 
-    println!("Starting web server");
+    println!("Starting Server");
     HttpServer::new(|| {
         App::new()
             .wrap(middleware::Logger::default())
-
+            .route("/", web::get().to(greet))
+            .route("/{name}", web::get().to(greet))
     })
-    .bind("0.0.0.0:8080")?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }
