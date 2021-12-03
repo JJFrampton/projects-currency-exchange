@@ -8,6 +8,10 @@ app.use((req, res, next) => {
   next();
 })
 
+let usage = `${req.baseUrl}/:from/:to/:amt
+            EG:
+            ${req.baseUrl}/CAD/GBP/99`;
+
 let currencies = [
   "AED", "ARS", "AUD", "BGN", "BRL", "BSD", "CAD",
   "CHF", "CLP", "CNY", "COP", "CZK", "DKK", "DOP",
@@ -33,14 +37,11 @@ app.get('/currencies', function (req, res) {
 })
 
 app.get('/usage', function (req, res) {
-  let usage = `${req.baseUrl}/:from/:to/:amt
-  EG:
-  ${req.baseUrl}/CAD/GBP/99`;
   res.send(usage);
 })
 
 app.get(['/', '/help', 'endpoints'], function (req, res) {
-  res.send("/usage\n/currencies\n/:from/:to/:amt\n");
+  res.send(usage);
 })
 
 app.listen(process.env.PORT || 3000, "0.0.0.0");
