@@ -33,7 +33,10 @@ app.get('/currencies', function (req, res) {
 })
 
 app.get('/usage', function (req, res) {
-  res.send("/:from/:to/:amt\n");
+  let usage = `${req.baseUrl}/:from/:to/:amt
+  EG:
+  ${req.baseUrl}/CAD/GBP/99`;
+  res.send(usage);
 })
 
 app.get(['/', '/help', 'endpoints'], function (req, res) {
