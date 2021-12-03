@@ -6,6 +6,7 @@ This repo currently houses several stand alone versions of the same project
 - This is a purely client side version of the app
 - Uses only html and javascript
 
-### Exchange-api
+### (Depricated) Exchange-api
+__Depricated__ : see projects-currency-exchange-node-api
 - This is a server side version of the app
 - Uses only nodejs & express
